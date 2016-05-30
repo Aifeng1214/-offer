@@ -1,0 +1,61 @@
+http://www.lintcode.com/zh-cn/problem/implement-queue-by-two-stacks/
+/*********************用栈实现队列***************/
+class Queue {
+public:
+    stack<int> stack1;
+    stack<int> stack2;
+
+    void push(int element) {
+        stack1.push(element);
+    }
+    int pop() {
+        while(!stack1.empty()){
+            int temp=stack1.top();
+            stack2.push(temp);
+            stack1.pop();
+        }
+        int a=stack2.top();
+        stack2.pop();
+        while(!stack2.empty()){
+            int temp=stack2.top();
+            stack1.push(temp);
+            stack2.pop();
+        }
+        return a;
+    }
+};
+/*********************用栈实现队列***************/
+
+
+https://leetcode.com/problems/implement-stack-using-queues/
+/*********************用队列实现栈***************/
+class Stack {
+public:
+    queue<int> que;
+    // Push element x onto stack.
+    void push(int x) {
+        que.push(x);
+        for(int i=1;i<que.size();++i){
+            que.push(que.front());
+            que.pop();
+        }
+        return;
+    }
+
+    // Removes the element on top of the stack.
+    void pop() {
+        que.pop();
+        return;
+    }
+
+    // Get the top element.
+    int top() {
+        return que.front();
+    }
+
+    // Return whether the stack is empty.
+    bool empty() {
+        return que.empty();
+    }
+};
+/*********************用队列实现栈***************/
