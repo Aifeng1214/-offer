@@ -1,0 +1,17 @@
+http://www.lintcode.com/zh-cn/problem/delete-node-in-the-middle-of-singly-linked-list/
+
+class Solution {
+public:
+    /**
+     * @param node: a node in the list should be deleted
+     * @return: nothing
+     */
+    void deleteNode(ListNode *node) {
+        ListNode *tmp=node->next;
+        node->val=tmp->val;
+        node->next=tmp->next;
+        delete tmp;
+        tmp=NULL;
+        return;
+    }
+};
