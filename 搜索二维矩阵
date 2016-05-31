@@ -1,0 +1,26 @@
+http://www.lintcode.com/zh-cn/problem/search-a-2d-matrix/
+
+//思路：利用二位矩阵的性质，从左下角开始遍历；大于target就往上，小于target就往右
+class Solution {
+public:
+    /**
+     * @param matrix, a list of lists of integers
+     * @param target, an integer
+     * @return a boolean, indicate whether matrix contains target
+     */
+    bool searchMatrix(vector<vector<int> > &matrix, int target) {
+        if(matrix.size()==0) return false;
+        int row=matrix.size(),col=matrix[0].size();
+        int i=row-1,j=0;
+        while(i>=0 && j<col){
+            if(matrix[i][j]==target){
+                return true;
+            }else if(matrix[i][j]>target){
+                i--;
+            }else{
+                j++;
+            }
+        }
+        return false;
+    }
+};
