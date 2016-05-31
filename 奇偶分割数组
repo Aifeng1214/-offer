@@ -1,0 +1,27 @@
+
+http://www.lintcode.com/zh-cn/problem/partition-array-by-odd-and-even/
+
+//思路：用2个指针，分别从头和尾遍历整个数组；
+        头的指针找到第一个偶数，尾的指针找到第一个奇数，做交换
+class Solution {
+public:
+    /**
+     * @param nums: a vector of integers
+     * @return: nothing
+     */
+    void partitionArray(vector<int> &nums) {
+        if(nums.size()==0) return;
+        std::vector<int>::iterator iter1=nums.begin(),iter2=nums.end()-1;
+        while(iter1<iter2){
+            while(*iter1%2==1)
+                iter1++;
+            while(*iter2%2==0)
+                iter2--;
+            if(iter1<iter2){    //此处要做判断！
+                swap(*iter1,*iter2);
+                iter1++;iter2--;
+            }
+        }
+        return;
+    }
+};
