@@ -1,0 +1,21 @@
+http://www.lintcode.com/zh-cn/problem/reverse-linked-list/
+
+class Solution {
+public:
+    /**
+     * @param head: The first node of linked list.
+     * @return: The new head of reversed linked list.
+     */
+    ListNode *reverse(ListNode *head) {
+        if(head==NULL || head->next==NULL) return head;
+        ListNode *pre=NULL,*cur=head,*nex=head->next;
+        while(nex){
+            pre=cur;
+            cur=nex;
+            nex=nex->next;
+            cur->next=pre;
+        }
+        head->next=NULL;
+        return cur;
+    }
+};
