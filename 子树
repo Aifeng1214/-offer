@@ -1,0 +1,19 @@
+http://www.lintcode.com/zh-cn/problem/subtree/
+
+//思路：先判断T2是否为根节点的子树，如果不是，再判断是否为根节点左右子树的子树。
+class Solution {
+public:
+    bool isSubtree(TreeNode *T1, TreeNode *T2) {  
+        if (T2 == NULL) return true; 
+        if (T1 == NULL) return false;
+        return dp(T1,T2) ||  isSubtree(T1->left,T2) || isSubtree(T1->right,T2);
+    }  
+      
+    bool dp (TreeNode *T1, TreeNode *T2) {  
+        if (T1 && T2 && T1->val == T2->val) 
+            return dp(T1->left,T2->left) && dp (T1->right,T2->right);  
+        if (T1 == NULL && T2 == NULL) 
+            return true;  
+        return false;  
+    }  
+};
