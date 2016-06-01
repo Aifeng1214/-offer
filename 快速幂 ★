@@ -1,0 +1,22 @@
+http://www.lintcode.com/zh-cn/problem/fast-power/
+
+//思路：
+快速幂去模算法：
+a^n mod b = (a mod b)^n mod b;
+
+a^n mod b=((a^2)^(n/2)) mod b   n为偶数
+a^n mod b=((a^2)^(n/2))*a mod b   n为奇数
+class Solution {
+public:
+    int fastPower(int a, int b, int n) {  
+        if(n==0)  
+            return 1%b;  
+        if(n==1)  
+            return a%b;  
+        long long temp = fastPower(a,b,n/2);  
+        if(n&1)  
+            return ((temp*temp)%b)*a%b;  
+        else  
+            return temp*temp%b;  
+    }  
+};
