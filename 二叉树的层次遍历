@@ -1,0 +1,30 @@
+http://www.lintcode.com/zh-cn/problem/binary-tree-level-order-traversal/
+
+//思路：
+1.利用一个队列来依次存入根结点和左右子树，利用一个NULL来做标记
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode *root) {
+        vector<vector<int>> res;
+        if(!root) return res;
+        queue<TreeNode*> que;
+        que.push(root);
+        que.push(NULL);
+        vector<int>tmp;
+        while(!que.empty()){
+            TreeNode* q=que.front();
+            que.pop();
+            if(q==NULL){
+                res.push_back(tmp);
+                tmp.clear();
+                if(que.size()>0)
+                    que.push(NULL);
+            }else{
+                tmp.push_back(q->val);
+                if(q->left) que.push(q->left);
+                if(q->right) que.push(q->right);
+            }
+        }
+        return res;
+    }
+};
