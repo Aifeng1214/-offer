@@ -16,7 +16,7 @@ public:
             if(root->left) helper(root->left,target-root->val);
             if(root->right) helper(root->right,target-root->val);
         }
-        tmp.pop_back(); //此处很重要，保证在将tmp放入res之后，每一层即删除一个tmp尾部的数据
+        tmp.pop_back(); //此处很重要，保证在将tmp放入res之后，每退出一层迭代就删除一个tmp尾部的数据
     }
 private:
     vector<vector<int>> res;
