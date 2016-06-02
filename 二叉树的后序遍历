@@ -1,0 +1,17 @@
+http://www.lintcode.com/zh-cn/problem/binary-tree-postorder-traversal/
+
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode *root) {
+        helper(root);
+        return res;
+    }
+    void helper(TreeNode *root){
+        if(!root) return;
+        helper(root->left);
+        helper(root->right);
+        res.push_back(root->val);
+    }
+private:
+    vector<int> res;
+};
