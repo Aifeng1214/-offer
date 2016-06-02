@@ -1,0 +1,34 @@
+http://www.lintcode.com/zh-cn/problem/min-stack/
+
+//思路：
+1.利用两个stack来实现带最小值操作的栈
+2.stack1中做任何push和pop操作，将最小的数push到stack2中
+3.每次push，判断stack2为空或者push的数小于等于min()，则也push到stack2中
+class MinStack {
+public:
+    MinStack() {
+        // do initialization if necessary
+    }
+
+    void push(int number) {
+        s1.push(number);
+        if(s2.empty() || number<=min())
+            s2.push(number);
+    }
+
+    int pop() {
+        if(s1.top()==min()){
+            s2.pop();
+        }
+        int tmp=s1.top();
+        s1.pop();
+        return tmp;
+    }
+
+    int min() {
+        return s2.top();
+    }
+private:
+    stack<int> s1;
+    stack<int> s2;
+};
