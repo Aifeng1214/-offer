@@ -1,0 +1,21 @@
+http://www.lintcode.com/zh-cn/problem/intersection-of-two-linked-lists/
+
+//思路：
+1.如果两个聊边没有交集，那么在遍历2个链表长度的最小公倍数次之后2个指针到达NULL
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode *p=headA, *q=headB;
+        
+        if(!p || !q) return NULL;
+        
+        while(p && q && p!=q){
+            p=p->next;
+            q=q->next;
+            if(p==q) return p;
+            if(p==NULL) p=headA;
+            if(q==NULL) q=headB;
+        }
+        return p;
+    }
+};
