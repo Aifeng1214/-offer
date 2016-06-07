@@ -1,0 +1,14 @@
+http://www.lintcode.com/zh-cn/problem/maximum-depth-of-binary-tree/
+
+class Solution {
+public:
+    /**
+     * @param root: The root of binary tree.
+     * @return: An integer
+     */
+    int maxDepth(TreeNode *root) {
+        if(root==NULL) return 0;
+        if(!root->left && !root->right) return 1;
+        return 1+max(maxDepth(root->left),maxDepth(root->right));
+    }
+};
