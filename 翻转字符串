@@ -1,0 +1,29 @@
+http://www.lintcode.com/zh-cn/problem/reverse-words-in-a-string/
+
+class Solution {
+public:
+    string reverseWords(string s) {
+        if(s.size()==0) return s;
+        stack<string> stk;
+        string tmp="";
+        int i;
+        for(i=0;i<s.size();){
+            if(s[i]==' '){
+                i++;
+            }else{
+                while(s[i]!=' ' && i<s.size()) //这边也要做判断
+                    tmp+=s[i++];
+                stk.push(tmp);
+                tmp="";
+            }
+        }
+        if(stk.empty()) return tmp;
+        while(!stk.empty()){
+            tmp+=stk.top();
+            stk.pop();
+            tmp+=' ';
+        }
+        tmp.erase(tmp.end()-1);
+        return tmp;
+    }
+};
