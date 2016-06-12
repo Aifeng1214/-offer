@@ -1,0 +1,22 @@
+http://www.lintcode.com/zh-cn/problem/a-b-problem/
+
+class Solution {
+public:
+    /*
+     * @param a: The first integer
+     * @param b: The second integer
+     * @return: The sum of a and b
+     */
+    int aplusb(int a, int b) {
+        int res=0, carry=0, sum=0;
+        for(int i=0;i<32;++i){
+            int b1=a&1, b2=b&1;
+            sum=b1^b2^carry;
+            carry=max((b1&b2),max((b1&carry),(b2&carry)));
+            res^=(sum<<i);
+            a>>=1;
+            b>>=1;
+        }
+        return res;
+    }
+};
