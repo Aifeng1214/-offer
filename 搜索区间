@@ -1,0 +1,28 @@
+http://www.lintcode.com/zh-cn/problem/search-for-a-range/#
+
+//思路：二分法寻找左右两个端点
+1.寻找左边界的时候，只有当A[mid]<target则i=mid+1，保证最左边界
+2.寻找右边界的时候，只有当A[mid]>target则j=mid-1，保证最右边界
+class Solution {
+public:
+    vector<int> searchRange(vector<int> &A, int target) {
+        vector<int> res(2,-1);
+        int i=0, j=A.size()-1;
+        while(i<j){
+            int mid=(i+j)/2;
+            if(A[mid]<target) i=mid+1;
+            else j=mid;
+        }
+        if(A[i]!=target) return res;
+        else res[0]=i;
+        
+        j=A.size()-1;
+        while(i<j){
+            int mid=(i+j)/2;
+            if(A[mid]>target) j=mid-1;
+            else i=mid;
+        }
+        res[1]=j;
+        return res;
+    }
+};
