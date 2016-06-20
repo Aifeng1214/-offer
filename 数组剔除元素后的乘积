@@ -1,0 +1,24 @@
+http://www.lintcode.com/zh-cn/problem/product-of-array-exclude-itself/
+
+//思路：
+1. 对于结果数组中的每一个位置i，先计算i前面所有数字的乘积
+2. 再从后面开始，乘上后面位置上的所有数字的乘积
+class Solution {
+public:
+    /**
+     * @param A: Given an integers array A
+     * @return: A long long array B and B[i]= A[0] * ... * A[i-1] * A[i+1] * ... * A[n-1]
+     */
+    vector<long long> productExcludeItself(vector<int> &nums) {
+        int n=nums.size();
+        vector<long long>res(n,1);
+        for(int i=1;i<n;++i)
+            res[i]=res[i-1]*nums[i-1];
+        long long right=1;
+        for(int i=n-1;i>=0;--i){
+            res[i]*=right;
+            right*=nums[i];
+        }
+        return res;
+    }
+};
