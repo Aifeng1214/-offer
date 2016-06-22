@@ -1,0 +1,26 @@
+http://www.lintcode.com/zh-cn/problem/linked-list-cycle-ii/
+
+//思路：
+1.快慢指针，慢指针1次1步；快指针1次2步
+2.如果有环的话，跑了k次之后快慢指针相遇，则有2k-k=n*r  r为环路的长度
+3.记head到环接处的长度为s，环接处到相遇位置的距离为m，则有s=k-m=nr-m
+  则有nr=m+s
+4.即有第一次相遇处移动s的距离正好是n圈环路，结果最终正好在环路出口点
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode *slow=head, *fast=head;
+        while(fast && fast->next){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast) break;
+        }
+        if(!fast || !fast->next) return NULL;
+        slow=head;
+        while(slow!=fast){
+            slow=slow->next;
+            fast=fast->next;
+        }
+        return fast;
+    }
+};
