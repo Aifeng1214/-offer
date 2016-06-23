@@ -1,19 +1,18 @@
 http://www.lintcode.com/zh-cn/problem/space-replacement/
 
+//思路：
+1.从头开始遍历整个string，发现有位置i有空格则将整个string的长度length加2
+2.从最后面j=length-1开始依次将前面2个位置上的字符赋给当前位置,直到j=i+2（因为i+2位置要赋为0）
+3.依次对i,i+1,i+2位置的字符串赋值为%，2,0
 class Solution {
 public:
-    /**
-     * @param string: An array of Char
-     * @param length: The true length of the string
-     * @return: The true length of new string
-     */
     int replaceBlank(char string[], int length) {
         for(int i=0;i<length;++i)
         {
             if(string[i]==' ')
             {
                 length+=2;
-                for(int j=length;j>i;--j)
+                for(int j=length-1;j>i+2;--j)
                 {
                     string[j]=string[j-2];
                 }
