@@ -1,11 +1,15 @@
 http://www.lintcode.com/zh-cn/problem/reverse-linked-list/
 
+//思路：
+1.三个指针分别记录前一个node，当前node和下一个node
+2.判断如果nex存在表面链表还没到NULL，所以继续循环，循环包括以下4部
+  (1)pre指向cur
+  (2)cur指向nex
+  (3)nex指向nex->next
+  (4)cur->next=pre 即翻转
+3.最后将head->next置为NULL  返回cur（因为nex已经达到NULL，cur即为原先的链表尾，新的链表头）
 class Solution {
 public:
-    /**
-     * @param head: The first node of linked list.
-     * @return: The new head of reversed linked list.
-     */
     ListNode *reverse(ListNode *head) {
         if(head==NULL || head->next==NULL) return head;
         ListNode *pre=NULL,*cur=head,*nex=head->next;
