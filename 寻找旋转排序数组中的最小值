@@ -1,0 +1,25 @@
+http://www.lintcode.com/zh-cn/problem/find-minimum-in-rotated-sorted-array/
+
+//思路：二分搜索
+1.给定好数组的下标start和end
+2.如果num[start]<num[end]则表明数组是排好序的，直接输出num[start]，否则转3
+3.取中间数mid=(start+end)/2并比较num[start]与num[mid]大小
+  1)如果num[start]<=num[mid],则反转点在右半部分，start=mid+1;
+  2)如果num[start]>num[mid],则反转点在左半部分,end=mid;
+class Solution {
+public:
+    int findMin(vector<int> &num) {
+        if(num.size()==0) return 0;
+        if(num.size()==1) return num[0];
+        int start=0, end=num.size()-1;
+        while(start<end){
+            if(num[start]<num[end])
+                return num[start];
+            int mid=(start+end)/2;
+            if(num[start]<=num[mid])    //一定要是<=
+                start=mid+1;
+            else end=mid;
+        }
+        return num[start];
+    }
+};
