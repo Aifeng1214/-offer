@@ -16,9 +16,9 @@ public:
             if(num[start]<num[end])
                 return num[start];
             int mid=(start+end)/2;
-            if(num[start]<=num[mid])    //一定要是<=
-                start=mid+1;
-            else end=mid;
+            if(num[end]>=num[mid])    //一定要是<=
+                end=mid;
+            else start=mid+1;
         }
         return num[start];
     }
