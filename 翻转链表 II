@@ -2,34 +2,24 @@ http://www.lintcode.com/zh-cn/problem/reverse-linked-list-ii/
 
 class Solution {
 public:
-    /**
-     * @param head: The head of linked list.
-     * @param m: The start position need to reverse.
-     * @param n: The end position need to reverse.
-     * @return: The new head of partial reversed linked list.
-     */
-    ListNode *reverseBetween(ListNode *head, int m, int n) {
-        if(head->next==NULL || head==NULL) return head;
+    ListNode* reverseBetween(ListNode* head, int m, int n) {
         if(m==n) return head;
-        ListNode *p=head,*q=head;
-        ListNode *new_head=new ListNode(-1);
-        ListNode *ptr=new_head;
+        ListNode *new_head=new ListNode(0);
         new_head->next=head;
-        while(--m){
-            p=p->next;
-            ptr=ptr->next;
-        }
-        while(--n)
-            q=q->next;
-        ListNode *pre=NULL,*cur=p,*nex=p->next;
-        while(cur!=q){
+        ListNode* pre=new_head;
+        int tmp=m;
+        while(--m)
+            pre=pre->next;
+        ListNode* flag=pre, *cur=pre->next, *nex=pre->next->next;
+        n=n-tmp;    //一定要n-tmp，因为m已经自减为0了
+        while(n--){
             pre=cur;
             cur=nex;
             nex=nex->next;
             cur->next=pre;
         }
-        p->next=nex;
-        ptr->next=q;
+        flag->next->next=nex;
+        flag->next=cur;
         return new_head->next;
     }
 };
