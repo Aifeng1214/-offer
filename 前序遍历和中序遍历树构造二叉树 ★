@@ -1,0 +1,29 @@
+http://www.lintcode.com/zh-cn/problem/construct-binary-tree-from-preorder-and-inorder-traversal/
+
+//思路：
+1.取preorder的第一个作为根
+2.找到inorder中值为根的，则inorder中左侧即为左子树，右侧的为右子数
+        // tree        8 4 5 3 7 3
+        // preorder    8 [4 3 3 7] [5]
+        // inorder     [3 3 4 7] 8 [5]
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        return helper(0,preorder.size(),preorder,0,inorder.size(),inorder);
+    }
+    
+    TreeNode* helper(int pre_start, int pre_end, vector<int>& preorder, int in_start, int in_end, vector<int>& inorder){
+        if(pre_start>=pre_end || in_start>=in_end)
+            return NULL;
+            
+        int root_val=preorder[pre_start];
+        TreeNode* root=new TreeNode(root_val);
+        
+        auto pos=find(inorder.begin()+in_start, inorder.begin()+in_end, root_val);
+        int dis=pos-(inorder.begin()+in_start);
+        
+        root->left=helper(pre_start+1, pre_start+1+dis, preorder, in_start, in_start+dis, inorder);
+        root->right=helper(pre_start+1+dis, pre_end, preorder, in_start+1+dis, in_end, inorder);
+        return root;
+    }
+};
