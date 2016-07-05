@@ -1,0 +1,24 @@
+http://www.lintcode.com/zh-cn/problem/two-sum/
+
+//思路
+1.传统暴力求解时间复杂度O(n2)
+2.利用map来处理，key是数值value是其对应的下标
+3.map的find是查询key，返回的是value
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &nums, int target) {
+        // key是数值，value对应的是标号
+        unordered_map<int,int>mp;
+        vector<int> res;
+        for(int i=0;i<nums.size();++i){
+            int another=target-nums[i];
+            if(mp.find(another)!=mp.end()){
+                res.push_back(mp[another]);
+                res.push_back(i+1);
+            }else{
+                mp[nums[i]]=i+1;
+            }
+        }
+        return res;
+    }
+};
