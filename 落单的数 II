@@ -1,0 +1,27 @@
+http://www.lintcode.com/zh-cn/problem/single-number-ii/
+
+//思路：
+1.将int看成32位bit数相加，则每一位上出现不是3的正数次的就是那个落单的数的某一个bit
+2.相加的时候注意溢出
+class Solution {
+public:
+    int singleNumberII(vector<int> &A) {
+        vector<int>vec(32,0);
+        for(int i=0;i<A.size();++i){
+            int tmp=A[i];
+            for(int j=31;j>=0;--j){
+                vec[j]+=tmp&1;
+                vec[j]%=3;    //先做%处理防止溢出
+                tmp>>=1;
+                if(tmp==0) break;
+            }
+        }
+        int res=0;
+        for(int j=31;j>=0;--j){
+            if(vec[j]%3){
+                res+=vec[j]<<(511-j);
+            }
+        }
+        return res;
+    }
+};
