@@ -1,25 +1,30 @@
 http://www.lintcode.com/zh-cn/problem/reverse-linked-list-ii/
 
+//思路：
+1. 一个指针找到要开始反转的节点的前一个结点
+2. 对后续的结点进行翻转操作
+3. 进行n-m次循环反转
 class Solution {
 public:
-    ListNode* reverseBetween(ListNode* head, int m, int n) {
+    ListNode *reverseBetween(ListNode *head, int m, int n) {
+        // write your code here
         if(m==n) return head;
-        ListNode *new_head=new ListNode(0);
-        new_head->next=head;
-        ListNode* pre=new_head;
-        int tmp=m;
+        ListNode new_head(0);
+        new_head.next=head;
+        ListNode *ptr=&new_head;
+        int record=m;
         while(--m)
-            pre=pre->next;
-        ListNode* flag=pre, *cur=pre->next, *nex=pre->next->next;
-        n=n-tmp;    //一定要n-tmp，因为m已经自减为0了
+            ptr=ptr->next;
+        ListNode *pre=NULL, *cur=ptr->next, *nex=ptr->next->next;
+        n-=record;
         while(n--){
             pre=cur;
             cur=nex;
             nex=nex->next;
             cur->next=pre;
         }
-        flag->next->next=nex;
-        flag->next=cur;
-        return new_head->next;
+        ptr->next->next=nex;
+        ptr->next=cur;
+        return new_head.next;
     }
 };
