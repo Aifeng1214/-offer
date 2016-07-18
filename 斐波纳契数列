@@ -4,12 +4,9 @@ http://www.lintcode.com/zh-cn/problem/fibonacci/
 1.先确定好最开始的第一位和第二位数字
 2.要求第n位，则要进行n-2次迭代
 3.迭代的时候，将pre变成prepre，tmp变成pre
+/***************非迭代***************/         O(n)
 class Solution{
 public:
-    /**
-     * @param n: an integer
-     * @return an integer f(n)
-     */
     int fibonacci(int n) {
         if(n==1) return 0;
         if(n==2) return 1;
@@ -24,3 +21,15 @@ public:
         return res;
     }
 };
+
+/***************迭代***************/         O(2^n)
+class Solution{
+public:
+    int fibonacci(int n) {
+        if(n==1) return 0;
+        if(n==2) return 1;
+        
+        return fibonacci(n-2)+fibonacci(n-1);
+    }
+};
+
