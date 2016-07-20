@@ -2,27 +2,32 @@ http://www.lintcode.com/zh-cn/problem/spiral-matrix/
 
 class Solution {
 public:
+    /**
+     * @param matrix a matrix of m x n elements
+     * @return an integer array
+     */
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        vector<int> res;
+        // Write your code here
+        vector<int>res;
         if(matrix.size()==0 || matrix[0].size()==0) return res;
-        int top=0,left=0,bottom=matrix.size()-1,right=matrix[0].size()-1;
-        while(top<=bottom && left<=right){
+        int buttom=matrix.size()-1, right=matrix[0].size()-1, top=0, left=0;
+        while(top<=buttom && left<=right){
             for(int j=left;j<=right;++j)
                 res.push_back(matrix[top][j]);
             top++;
-            for(int i=top;i<=bottom;++i)
+            for(int i=top;i<=buttom;++i)
                 res.push_back(matrix[i][right]);
             right--;
-            if(top<=bottom){  //由于top++，需要做判断
+            if(top<=buttom){  //由于top++，需要做判断
                 for(int j=right;j>=left;--j)
-                    res.push_back(matrix[bottom][j]);
-                bottom--;
+                    res.push_back(matrix[buttom][j]);
+                buttom--;
             }
             if(left<=right){  //由于right--，需要做判断
-                for(int i=bottom;i>=top;--i)
+                for(int i=buttom;i>=top;--i)
                     res.push_back(matrix[i][left]);
+                left++;
             }
-            left++;
         }
         return res;
     }
