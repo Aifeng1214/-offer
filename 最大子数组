@@ -1,0 +1,18 @@
+http://www.lintcode.com/zh-cn/problem/maximum-subarray/#
+
+//思路：动态规划
+记dp[i]是以nums[i]结尾的最大子数组的结果，则有：dp[i]=max(dp[i-1]+nums[i], nums[i]);
+class Solution {
+public:    
+    int maxSubArray(vector<int> nums) {
+        // write your code here
+        int len=nums.size(),res=nums[0];
+        vector<int>dp(len,0);
+        dp[0]=nums[0];
+        for(int i=1;i<nums.size();++i){
+            dp[i]=max(dp[i-1]+nums[i],nums[i]);
+            res=max(res,dp[i]);
+        }
+        return res;
+    }
+};
