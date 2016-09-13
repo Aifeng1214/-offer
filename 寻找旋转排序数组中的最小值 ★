@@ -4,8 +4,8 @@ http://www.lintcode.com/zh-cn/problem/find-minimum-in-rotated-sorted-array/
 1.给定好数组的下标start和end
 2.如果num[start]<num[end]则表明数组是排好序的，直接输出num[start]，否则转3
 3.取中间数mid=(start+end)/2并比较num[start]与num[mid]大小
-  1)如果num[start]<=num[mid],则反转点在右半部分，start=mid+1;
-  2)如果num[start]>num[mid],则反转点在左半部分,end=mid;
+  1)如果num[mid]<=num[end],则反转点在右半部分，end=mid;
+  2)如果num[mid]>num[end],则反转点在左半部分,start=mid+1;
 class Solution {
 public:
     int findMin(vector<int> &num) {
