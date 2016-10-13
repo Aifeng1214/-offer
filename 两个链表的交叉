@@ -17,5 +17,6 @@ public:
             if(pa==NULL) pa=headA;
             if(pb==NULL) pb=headB;
         }
+        return pa;
     }
 };
